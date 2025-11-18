@@ -61,4 +61,25 @@ type point = [number, number];
 const myID: ID = "abc-123";
 ```
 
-What is the use of the keyof keyword in TypeScript? Provide an example.
+## উদাহরণসহ TypeScript-এ keyof কী ওয়ার্ড এর ব্যবহার লিখ।
+
+**উত্তরঃ** `keyof` একটি টাইপ অপারেটর, যা একটি অবজেক্টের সকল `key` গুলোর `union` টাইপ তৈরি করে। এটি সাধারণত অবজেক্টের প্রপার্টি নামগুলো পেতে ব্যবহার করা হয়। যেমন, যদি কোন অবজেক্ট টাইপের 'A', 'B' এবং 'C' নামে প্রপার্টি থাকে, তবে `keyof` সেই টাইপটির জন্য 'A' | 'B' | 'C' ইউনিয়ন টাইপ তৈরি করে। এটি মূলত জেনেরিক ফাংশন তৈরির সময় একটি অবজেক্টের বৈধ কী যাচাই করতে উপযোগী।
+
+উদাহরণঃ
+
+```ts
+// একটি অবজেক্ট টাইপ
+type Person = {
+	name: string;
+	age: number;
+	address: string;
+};
+
+// PersonKeys টাইপ হবে: "name" | "age" | "address"
+type PersonKeys = keyof Person;
+
+// ফাংশনে keyof ব্যবহার
+function getProperty(object: Person, key: keyof Person) {
+	return object[key]; // অবজেক্টের প্রপার্টি অ্যাক্সেস করা
+}
+```
